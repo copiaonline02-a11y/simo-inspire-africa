@@ -1,15 +1,18 @@
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Play, ExternalLink, Youtube } from "lucide-react";
+import { Play, ExternalLink, Youtube, X } from "lucide-react";
 
 const VideoSection = () => {
+  const [playingVideo, setPlayingVideo] = useState<string | null>(null);
   const videos = [
     {
       title: "Stratégies d'Investissement en Afrique",
       description: "Découvrez les meilleures stratégies pour investir efficacement dans les marchés africains et créer de la valeur durable.",
       thumbnail: "https://img.youtube.com/vi/Zyu7TREwDxQ/maxresdefault.jpg",
       url: "https://www.youtube.com/watch?v=Zyu7TREwDxQ",
+      embedId: "Zyu7TREwDxQ",
       duration: "12:30",
       views: "45K"
     },
@@ -18,6 +21,7 @@ const VideoSection = () => {
       description: "Comment la diaspora peut jouer un rôle clé dans le développement économique du continent africain.",
       thumbnail: "https://img.youtube.com/vi/pnRgYDMfWLw/maxresdefault.jpg",
       url: "https://www.youtube.com/watch?v=pnRgYDMfWLw",
+      embedId: "pnRgYDMfWLw",
       duration: "18:45",
       views: "32K"
     },
@@ -26,6 +30,7 @@ const VideoSection = () => {
       description: "Guide pratique pour les nouveaux entrepreneurs : éviter les pièges courants et maximiser ses chances de succès.",
       thumbnail: "https://img.youtube.com/vi/3Y7OWkdkRJE/maxresdefault.jpg",
       url: "https://www.youtube.com/watch?v=3Y7OWkdkRJE",
+      embedId: "3Y7OWkdkRJE",
       duration: "15:20",
       views: "67K"
     }
@@ -52,32 +57,60 @@ const VideoSection = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {videos.map((video, index) => (
             <Card key={index} className="group hover:shadow-[var(--shadow-card)] transition-all duration-300 overflow-hidden">
-              {/* Video Thumbnail */}
+              {/* Video Player or Thumbnail */}
               <div className="relative aspect-video bg-muted overflow-hidden">
-                <img
-                  src={video.thumbnail}
-                  alt={video.title}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-                
-                {/* Play Overlay */}
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                  <div className="p-4 bg-accent/90 rounded-full">
-                    <Play className="h-8 w-8 text-white fill-current" />
+                {playingVideo === video.embedId ? (
+                  // Embedded YouTube Player
+                  <div className="relative w-full h-full">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${video.embedId}?autoplay=1&rel=0`}
+                      title={video.title}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full"
+                    />
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setPlayingVideo(null)}
+                      className="absolute top-2 right-2 bg-black/50 hover:bg-black/70 text-white"
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
                   </div>
-                </div>
+                ) : (
+                  // Thumbnail with Play Button
+                  <>
+                    <img
+                      src={video.thumbnail}
+                      alt={video.title}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                    
+                    {/* Play Overlay */}
+                    <div 
+                      className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center cursor-pointer"
+                      onClick={() => setPlayingVideo(video.embedId)}
+                    >
+                      <div className="p-4 bg-red-600/90 rounded-full hover:bg-red-500 transition-colors">
+                        <Play className="h-8 w-8 text-white fill-current" />
+                      </div>
+                    </div>
 
-                {/* Duration Badge */}
-                <div className="absolute bottom-3 right-3">
-                  <Badge variant="secondary" className="bg-black/70 text-white text-xs">
-                    {video.duration}
-                  </Badge>
-                </div>
+                    {/* Duration Badge */}
+                    <div className="absolute bottom-3 right-3">
+                      <Badge variant="secondary" className="bg-black/70 text-white text-xs">
+                        {video.duration}
+                      </Badge>
+                    </div>
 
-                {/* YouTube Icon */}
-                <div className="absolute top-3 left-3">
-                  <Youtube className="h-6 w-6 text-red-500" />
-                </div>
+                    {/* YouTube Icon */}
+                    <div className="absolute top-3 left-3">
+                      <Youtube className="h-6 w-6 text-red-500" />
+                    </div>
+                  </>
+                )}
               </div>
 
               <CardHeader className="pb-4">
@@ -94,21 +127,32 @@ const VideoSection = () => {
                   {video.description}
                 </p>
 
-                <Button 
-                  asChild
-                  className="w-full bg-accent hover:bg-accent/90 text-accent-foreground group/btn"
-                >
-                  <a 
-                    href={video.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2"
+                <div className="flex gap-2">
+                  <Button 
+                    onClick={() => setPlayingVideo(video.embedId)}
+                    className="flex-1 bg-red-600 hover:bg-red-700 text-white"
+                    disabled={playingVideo === video.embedId}
                   >
-                    <Play className="h-4 w-4" />
-                    Regarder sur YouTube
-                    <ExternalLink className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-                  </a>
-                </Button>
+                    <Play className="mr-2 h-4 w-4" />
+                    {playingVideo === video.embedId ? 'En lecture...' : 'Regarder ici'}
+                  </Button>
+                  
+                  <Button 
+                    asChild
+                    variant="outline"
+                    size="sm"
+                    className="px-3"
+                  >
+                    <a 
+                      href={video.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1"
+                    >
+                      <ExternalLink className="h-3 w-3" />
+                    </a>
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           ))}

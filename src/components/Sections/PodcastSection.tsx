@@ -11,6 +11,7 @@ const PodcastSection = () => {
       duration: "45 min",
       date: "2024",
       url: "https://podcasts.apple.com/ca/podcast/ep-110-p1-w-philippe-simo-nabou-fall-delali-damessi/id1465612783?i=1000681319442",
+      embedUrl: "https://embed.podcasts.apple.com/ca/podcast/ep-110-p1-w-philippe-simo-nabou-fall-delali-damessi/id1465612783?i=1000681319442",
       episode: "110 P1",
       show: "Entrepreneur State Of Africa"
     },
@@ -20,6 +21,7 @@ const PodcastSection = () => {
       duration: "52 min",
       date: "2023",
       url: "https://podcasts.apple.com/us/podcast/ep-67-w-philippe-simo-sinstaller-en-c%C3%B4te-divoire-son/id1465612783?i=1000644352222",
+      embedUrl: "https://embed.podcasts.apple.com/us/podcast/ep-67-w-philippe-simo-sinstaller-en-c%C3%B4te-divoire-son/id1465612783?i=1000644352222",
       episode: "67",
       show: "Entrepreneur State Of Africa"
     }
@@ -74,9 +76,26 @@ const PodcastSection = () => {
               </CardHeader>
 
               <CardContent className="pt-0">
-                <p className="text-muted-foreground mb-6 leading-relaxed">
+                <p className="text-muted-foreground mb-4 leading-relaxed">
                   {podcast.description}
                 </p>
+
+                {/* Embedded Apple Podcast Player */}
+                <div className="mb-4">
+                  <iframe
+                    allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+                    frameBorder="0"
+                    height="175"
+                    style={{
+                      width: '100%',
+                      maxWidth: '660px',
+                      overflow: 'hidden',
+                      borderRadius: '10px'
+                    }}
+                    sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+                    src={podcast.embedUrl}
+                  />
+                </div>
 
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-muted-foreground font-medium">
@@ -85,7 +104,9 @@ const PodcastSection = () => {
                   
                   <Button 
                     asChild
-                    className="bg-accent hover:bg-accent/90 text-accent-foreground group/btn"
+                    variant="outline"
+                    size="sm"
+                    className="text-xs"
                   >
                     <a 
                       href={podcast.url} 
@@ -93,9 +114,8 @@ const PodcastSection = () => {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-2"
                     >
-                      <Play className="h-4 w-4" />
-                      Écouter
-                      <ExternalLink className="h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+                      <ExternalLink className="h-3 w-3" />
+                      Ouvrir dans Apple Podcasts
                     </a>
                   </Button>
                 </div>
