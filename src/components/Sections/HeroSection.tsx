@@ -46,22 +46,31 @@ const HeroSection = () => {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button 
-                onClick={scrollToContact}
+                asChild
                 size="lg"
                 className="bg-accent hover:bg-accent/90 text-accent-foreground font-semibold px-8 py-4 text-lg group"
               >
-                Prendre rendez-vous
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                <a 
+                  href="https://calendly.com/copiaonline02/30min" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label="Prendre rendez-vous via Calendly"
+                >
+                  Prendre rendez-vous
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </a>
               </Button>
               
               <Button 
-                onClick={scrollToAbout}
+                asChild
                 variant="outline" 
                 size="lg"
                 className="border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8 py-4 text-lg"
               >
-                <Play className="mr-2 h-5 w-5" />
-                Découvrir mon parcours
+                <a href="#about" aria-label="Découvrir mon parcours">
+                  <Play className="mr-2 h-5 w-5" />
+                  Découvrir mon parcours
+                </a>
               </Button>
             </div>
 
