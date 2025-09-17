@@ -14,6 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
+      calendly_bookings: {
+        Row: {
+          cancel_url: string | null
+          created_at: string
+          end_time: string | null
+          event_id: string | null
+          event_name: string | null
+          id: string
+          invitee_email: string | null
+          invitee_name: string | null
+          meeting_url: string | null
+          reschedule_url: string | null
+          start_time: string | null
+          status: string | null
+          updated_at: string
+        }
+        Insert: {
+          cancel_url?: string | null
+          created_at?: string
+          end_time?: string | null
+          event_id?: string | null
+          event_name?: string | null
+          id?: string
+          invitee_email?: string | null
+          invitee_name?: string | null
+          meeting_url?: string | null
+          reschedule_url?: string | null
+          start_time?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          cancel_url?: string | null
+          created_at?: string
+          end_time?: string | null
+          event_id?: string | null
+          event_name?: string | null
+          id?: string
+          invitee_email?: string | null
+          invitee_name?: string | null
+          meeting_url?: string | null
+          reschedule_url?: string | null
+          start_time?: string | null
+          status?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           created_at: string

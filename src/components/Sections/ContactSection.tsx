@@ -83,7 +83,7 @@ const ContactSection = () => {
       title: "Calendly",
       description: "Prendre rendez-vous",
       action: "Réserver un créneau",
-      href: "https://calendly.com/philippesimo",
+      href: "https://calendly.com/copiaonline02/30min",
       color: "text-accent"
     }
   ];
@@ -258,7 +258,7 @@ const ContactSection = () => {
                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                   >
                     <a 
-                      href="https://calendly.com/philippesimo" 
+                      href="https://calendly.com/copiaonline02/30min" 
                       target="_blank" 
                       rel="noopener noreferrer"
                     >
