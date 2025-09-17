@@ -41,30 +41,6 @@ export type Database = {
         }
         Relationships: []
       }
-      contacts: {
-        Row: {
-          created_at: string | null
-          email: string
-          full_name: string
-          id: string
-          message: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          email: string
-          full_name: string
-          id?: string
-          message?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          email?: string
-          full_name?: string
-          id?: string
-          message?: string | null
-        }
-        Relationships: []
-      }
     }
     Views: {
       [_ in never]: never
