@@ -2,38 +2,38 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { X, ZoomIn } from "lucide-react";
-import heroImage from "@/assets/philippe-simo-hero.jpg";
-import conferenceImage from "@/assets/philippe-conference-1.jpg";
-import officeImage from "@/assets/philippe-office.jpg";
-import mentoringImage from "@/assets/philippe-mentoring.jpg";
+import portrait1 from "@/assets/philippe-portrait-1.jpg";
+import portrait2 from "@/assets/philippe-portrait-2.jpg";
+import portrait3 from "@/assets/philippe-portrait-3.jpg";
+import portrait4 from "@/assets/philippe-portrait-4.jpg";
 
 const GallerySection = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const galleryImages = [
     {
-      src: heroImage,
+      src: portrait1,
       alt: "Portrait professionnel de Philippe Simo",
       category: "Portrait",
       title: "Portrait Professionnel"
     },
     {
-      src: conferenceImage,
-      alt: "Philippe Simo en conférence",
-      category: "Conférence",
-      title: "Conférence Entrepreneuriat"
+      src: portrait2,
+      alt: "Philippe Simo - Portrait décontracté",
+      category: "Portrait",
+      title: "Portrait Décontracté"
     },
     {
-      src: officeImage,
-      alt: "Philippe Simo dans son bureau",
-      category: "Travail",
-      title: "Au Bureau"
+      src: portrait3,
+      alt: "Philippe Simo - Portrait souriant",
+      category: "Portrait",
+      title: "Portrait Souriant"
     },
     {
-      src: mentoringImage,
-      alt: "Philippe Simo en session de mentoring",
-      category: "Formation",
-      title: "Session de Mentoring"
+      src: portrait4,
+      alt: "Philippe Simo - Portrait formel",
+      category: "Portrait",
+      title: "Portrait Formel"
     }
   ];
 
